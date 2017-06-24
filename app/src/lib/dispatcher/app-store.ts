@@ -1672,7 +1672,6 @@ export class AppStore {
     return gitStore.removeRemote(name)
   }
 
-
   /** This shouldn't be called directly. See `Dispatcher`. */
   public _setRemoteURL(repository: Repository, name: string, url: string): Promise<void> {
     const gitStore = this.getGitStore(repository)
