@@ -157,7 +157,15 @@ export class RepositorySettings extends React.Component<IRepositorySettingsProps
 
     if (this.props.remote && this.state.remote) {
       if (this.state.remoteDeleted) {
-        log.warn('TODO: remove the current remote')
+        try {
+          await this.props.dispatcher.removeRemote(
+            this.props.repository,
+            this.props.remote.name,
+          )
+        } catch (e) {
+          log.error(`RepositorySettings: unable to remove remote at ${this.props.repository.path}`, e)
+          errors.push(`Failed removing the remote: ${e}`)
+        }
       } else {
         if (this.state.remote.url !== this.props.remote.url) {
           try {
