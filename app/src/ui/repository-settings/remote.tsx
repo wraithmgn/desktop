@@ -21,21 +21,22 @@ interface IRemoteProps {
 }
 
 /** The Remote component. */
-export class Remote extends React.Component<IRemoteProps, void> {
+export class Remote extends React.Component<IRemoteProps, {}> {
   public render() {
     const remote = this.props.remote
 
     if (this.props.remoteDeleted) {
-    return (
-      <DialogContent>
-        <Row className='warning-helper-text'>
-          <Octicon symbol={OcticonSymbol.alert} />
-          <p>
-            Removing the <strong>{remote.name}</strong> remote will affect publishing the repository
-            to your remote server. Press <em>Save</em> to confirm this change.
-          </p>
-        </Row>
-      </DialogContent>
+      return (
+        <DialogContent>
+          <Row className="warning-helper-text">
+            <Octicon symbol={OcticonSymbol.alert} />
+            <p>
+              Removing the <strong>{remote.name}</strong> remote will affect
+              publishing the repository to your remote server. Press{' '}
+              <em>Save</em> to confirm this change.
+            </p>
+          </Row>
+        </DialogContent>
       )
     }
 
@@ -43,16 +44,22 @@ export class Remote extends React.Component<IRemoteProps, void> {
     return (
       <DialogContent>
         <Row>
-          <div>Primary remote repository ({remote.name})</div>
+          <div>
+            Primary remote repository ({remote.name})
+          </div>
         </Row>
         <Row>
-          <TextBox placeholder='Remote URL' value={remote.url} onChange={this.onChange}/>
+          <TextBox
+            placeholder="Remote URL"
+            value={remote.url}
+            onValueChanged={this.props.onRemoteUrlChanged}
+          />
           <LinkButton onClick={this.removeRemote} title={title}>
             <Octicon symbol={OcticonSymbol.trashcan} />
           </LinkButton>
-         </Row>
+        </Row>
 
-         {this.renderInvalidUrlWarning()}
+        {this.renderInvalidUrlWarning()}
       </DialogContent>
     )
   }
@@ -60,22 +67,15 @@ export class Remote extends React.Component<IRemoteProps, void> {
   private renderInvalidUrlWarning() {
     const isValidPath = this.props.remote.url.length > 0
 
-    if (isValidPath) { return null }
+    if (isValidPath) {
+      return null
+    }
 
-    return (
-      <DialogError>
-          You cannot create an empty remote URL.
-      </DialogError>
-    )
+    return <DialogError>You cannot create an empty remote URL.</DialogError>
   }
 
   private removeRemote = () => {
     // TODO: propagate this up the chain
     this.props.onRemoteRemoved()
-  }
-
-  private onChange = (event: React.FormEvent<HTMLInputElement>) => {
-    const url = event.currentTarget.value
-    this.props.onRemoteUrlChanged(url)
   }
 }
