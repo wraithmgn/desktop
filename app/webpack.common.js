@@ -57,8 +57,6 @@ const replacements = {
   'process.env.TEST_ENV': JSON.stringify(process.env.TEST_ENV),
 }
 
-const outputDir = 'out'
-
 const externals = ['7zip']
 if (channel === 'development') {
   externals.push('devtron')
@@ -68,7 +66,7 @@ const commonConfig = {
   externals: externals,
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, '..', outputDir),
+    path: path.join(__dirname, 'dist'),
     libraryTarget: 'commonjs2',
   },
   module: {
@@ -96,7 +94,7 @@ const commonConfig = {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin([outputDir], { verbose: false }),
+    // new CleanWebpackPlugin([outputDir], { verbose: false }),
     // This saves us a bunch of bytes by pruning locales (which we don't use)
     // from moment.
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
