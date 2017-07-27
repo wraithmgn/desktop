@@ -87,7 +87,8 @@
       "icon": "app/icons",
       "target": [
         "AppImage",
-        "deb"
+        "deb",
+        "rpm"
       ]
     },
     "extraResources": [

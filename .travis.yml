@@ -25,6 +25,7 @@ addons:
       - graphicsmagick
       - xz-utils
       - libsecret-1-dev
+      - rpm
 
 language: c
 
