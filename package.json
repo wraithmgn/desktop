@@ -10,7 +10,7 @@
     "dist": "npm run build:prod && build",
     "release": "npm run build:prod && build",
     "pack-all": "build -mwl",
-    "pack-unix": "build -ml",
+    "pack-linux": "build -l",
     "pack-mac": "build -m",
     "pack-win": "build -w",
     "postinstall": "cd app && npm install && cd .. && git submodule update --recursive --init && npm run compile:tslint",
