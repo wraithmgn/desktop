@@ -88,7 +88,8 @@
       "target": [
         "AppImage",
         "deb",
-        "rpm"
+        "rpm",
+        "snap"
       ]
     },
     "extraResources": [

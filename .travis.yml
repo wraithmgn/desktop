@@ -26,6 +26,7 @@ addons:
       - xz-utils
       - libsecret-1-dev
       - rpm
+      - snapcraft
 
 language: c
 
